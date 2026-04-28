@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+@theme {
+  --color-primary: #4A2C2A;
+  --color-bg-base: #F2EFE9;
+  --color-accent: #FF4B3E;
+  
+  --font-archivo: "Archivo Black", sans-serif;
+  --font-space: "Space Mono", monospace;
+  --font-inter: "Inter", sans-serif;
+  
+  --radius-xl: 20px;
+  --radius-lg: 12px;
+
+  --shadow-premium: 0 10px 40px -10px rgba(74, 44, 42, 0.15);
+  --shadow-premium-hover: 0 20px 60px -15px rgba(74, 44, 42, 0.25);
+  
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-premium: all 0.6s var(--ease-premium);
+}
+
+@layer base {
+  :root {
+    background-color: var(--color-bg-base);
+    color: var(--color-primary);
+    font-family: var(--font-inter);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.02em;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .glass-effect {
+    background: rgba(247, 242, 232, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(44, 30, 24, 0.1);
+  }
+
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.15;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    mix-blend-mode: overlay;
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background-size: 100px 100px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+  }
+
+  .animate-flicker {
+    animation: flicker 0.2s infinite;
+  }
+
+  .scene-transition {
+    transition: var(--transition-premium);
+  }
+
+  .hover-depth {
+    transition: var(--transition-premium);
+  }
+  
+  .hover-depth:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-premium-hover);
+  }
+}
